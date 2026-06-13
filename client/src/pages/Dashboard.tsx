@@ -1,6 +1,6 @@
-import { ActivityIcon, CheckCircleIcon, ClockIcon, SendIcon, Share2Icon, ShareIcon, TrendingUpIcon } from "lucide-react"
+import { ActivityIcon, CheckCircleIcon, ClockIcon, SendIcon, Share2Icon,  TrendingUpIcon } from "lucide-react"
 import { useEffect, useState } from "react"
-import { dummyActivityData, dummyPostsData } from "../assets/assets"
+import { dummyAccountsData, dummyActivityData, dummyPostsData } from "../assets/assets"
 
 const Dashboard = () => {
   const [stats,setStats]=useState({scheduled:0,published:0,connectedAccounts:0})
@@ -9,7 +9,7 @@ const Dashboard = () => {
   useEffect(()=>{
     const fetchDashboardData = async()=> {
 try{
-    const[postsRes,accountsRes,activityRes]=[{data: dummyPostsData},{data:dummyAccountsData},{data: dummyActivityData}]
+    const[postsRes,accountsRes,activityRes]=[{data: dummyPostsData},{data:dummyAccountsData},{data:dummyActivityData}]
     const posts=postsRes.data;
     setStats({
       scheduled: posts.filter((p: any)=> p.status === 'scheduled').length,
@@ -82,27 +82,29 @@ try{
             <span className="text-sm text-slate-400">{activities.length}events</span>
         </div>
 
-        {activities.length===0 ? (
-          <div className="flex flex-col items-center justify-center py-16 px-6"> 
-           
-            <div className="size-12 bg-slate-100 rounded-xl flex items-center justify-center mb-3">
-            <div><ActivityIcon className="size-6 text-slate-400 "/>
-          </div>
-          <p className="text-slate-500">No activity yet</p>
-          <p className="text-slate-400 text-sm mt-1">Connect accounts and schedule posts to see events here.</p>
-          </div>
-          </div>
-        ): (
+       {activities.length === 0 ? (
+  <div className="flex flex-col items-center justify-center py-16 px-6">
+    <div className="size-12 bg-slate-100 rounded-xl flex items-center justify-center mb-3">
+  <ActivityIcon className="size-6 text-slate-400" />
+</div>
+
+<p className="text-slate-500">No activity yet</p>
+
+<p className="text-slate-400 text-sm mt-1">
+  Connect accounts and schedule posts to see events here.
+</p>
+  </div>
+) : (
           <div className="divide-y divide-slate-50">
                {activities.map((activity)=>
               (
                 <div key={activity._id} className="flex items-start gap-4 px-6 py-4 hover:bg-slate-50/50 transition-colors">
-                  <div className="size-9 rounded-xl flex items-center justify-center shrink-0 mt-0.5 bg-zinc-100 tetx-zinc-600">
+                  <div className="size-9 rounded-xl flex items-center justify-center shrink-0 mt-0.5 bg-zinc-100 text-zinc-600">
                     <SendIcon className="size-4"/>
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between gap-2 mb-1">
-                      <span>Published</span>
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-600">Published</span>
                       <span className="text-xs text-slate-400 shrink-0">{new Date(activity.createdAt).toLocaleString()}</span>
                     </div>
                     <p className="text-sm text-slate-600">{activity.description}</p>
