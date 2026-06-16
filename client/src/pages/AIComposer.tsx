@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { dummyGenerationData, PLATFORMS } from "../assets/assets";
-import { ArrowRightIcon, CalendarIcon, ClockIcon, HistoryIcon, Loader2Icon, TimerIcon, Wand2Icon, XIcon } from "lucide-react";
+import { ArrowRightIcon, CalendarIcon, ClockIcon, HistoryIcon, Loader2Icon, Wand2Icon, XIcon } from "lucide-react";
 
 const AIComposer = () => {
 
@@ -16,7 +16,7 @@ const [activeScheduler,setActiveScheduler]=useState<any>(null);
 const [selectedPlatforms,setSelectedPlatforms]=useState<string[]>([])
 const [scheduledDate,setScheduledDate]=useState("");
 const [scheduledTime,setScheduledTime]=useState("");
-const [scheduling,setScheduling]=useState(false);
+// const [scheduling,setScheduling]=useState(false);
 
 const fetchGenerations = async ()=>{
   setGenerations(dummyGenerationData)
@@ -214,7 +214,7 @@ const tones =["Professional","Creative","Funny","Minimalist","Excited"];
                   </div>
 
                         <button>
-                        {scheduling ? <Loader2Icon className="size-4 animate-spin"/>:<TimerIcon className="size-4"/>}
+                        {/* {scheduling ? <Loader2Icon className="size-4 animate-spin"/>:<TimerIcon className="size-4"/>} */}
                         Schedule Post
                         </button>
                   </div>
