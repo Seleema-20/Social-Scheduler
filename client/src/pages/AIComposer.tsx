@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { dummyGenerationData, PLATFORMS } from "../assets/assets";
-import { ArrowRightIcon, CalendarIcon, ClockIcon, HistoryIcon, Loader2Icon, Wand2Icon, XIcon } from "lucide-react";
+import { ArrowRightIcon, CalendarIcon, ClockIcon, HistoryIcon, Loader2Icon, TimerIcon, Wand2Icon, XIcon } from "lucide-react";
 
 const AIComposer = () => {
 
@@ -16,7 +16,7 @@ const [activeScheduler,setActiveScheduler]=useState<any>(null);
 const [selectedPlatforms,setSelectedPlatforms]=useState<string[]>([])
 const [scheduledDate,setScheduledDate]=useState("");
 const [scheduledTime,setScheduledTime]=useState("");
-// const [scheduling,setScheduling]=useState(false);
+const [scheduling,setScheduling]=useState(false);
 
 const fetchGenerations = async ()=>{
   setGenerations(dummyGenerationData)
@@ -30,6 +30,13 @@ useEffect(()=>
 
 const handleGenerate = async ()=>{
   setLoading(true)
+  setTimeout(()=>{
+    setLoading(false)
+  },2000)
+}
+
+const handleSchedule=async ()=>{
+  setScheduling(true)
   setTimeout(()=>{
     setLoading(false)
   },2000)
@@ -213,8 +220,8 @@ const tones =["Professional","Creative","Funny","Minimalist","Excited"];
 </div>
                   </div>
 
-                        <button>
-                        {/* {scheduling ? <Loader2Icon className="size-4 animate-spin"/>:<TimerIcon className="size-4"/>} */}
+                        <button onClick={handleSchedule} className="w-full flex items-center justify-center gap-2 py-3 rounded-md bg-slate-200 text-slate-700 hover:bg-red-500 hover:text-white transiition">
+                        {scheduling ? <Loader2Icon className="size-4 animate-spin"/>:<TimerIcon className="size-4"/>}
                         Schedule Post
                         </button>
                   </div>
